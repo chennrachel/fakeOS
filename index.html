@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style.css" />
+        <script
+            src="https://kit.fontawesome.com/da3fa7fb48.js"
+            crossorigin="anonymous"
+        ></script>
+        <title>Document</title>
+    </head>
+    <nav id="main-menu-group">
+        <div class="dropdown">
+            <button class="dropbtn">
+            <i class="fa-brands fa-apple"></i></button>
+            <div class="dropdown-content">
+                <a id="dropdown-apple__a--about">About This Macintosh</a>
+                <a id="dropdown-apple__a--sd">Shutdown</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">File</button>
+            <div class="dropdown-content">
+                <a id="dropdown-file__a--open" class="greyed">Open</a>
+                <a id="dropdown-file__a--close" class="greyed">Close</a>
+                <a id="dropdown-file__a--close-all" class="greyed">Close All</a>
+                <a id="dropdown-file__a--close-all" class="greyed">Get Info</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Edit</button>
+            <div class="dropdown-content">
+                <a id="dropdown-edit__a" class="greyed">Copy</a>
+                <a id="dropdown-edit__a" class="greyed">Paste</a>
+                <a id="dropdown-edit__a" class="greyed">Delete</a>
+                <a id="dropdown-edit__a" class="greyed">Undo</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">View</button>
+            <div class="dropdown-content">
+                <a class="dropdown-view__a dropdown-view__a--selected greyed">by Name <i class="fa-solid fa-check"></i></a>
+                <a class="dropdown-view__a greyed">by Date</a>
+                <a class="dropdown-view__a greyed">by Size</a>
+                <a class="dropdown-view__a greyed">by Kind</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Special</button>
+            <div class="dropdown-content">
+                <a class="dropdown-special__a">Hello! This does nothing! Bye!</a>
+            </div>  
+        </div>
+        <span id="currentTime"></span>
+    </nav>
+    <body>
+    </p>
+    <div class="icons">
+        <div class="icon note" id="notepadIcon">
+            <i class="fa-regular fa-note-sticky fa-3x"></i></i>
+            <p>Notepad</p>
+        </div>
+        <div class="icon trsh" id="trashIcon">
+            <i class="fa-regular fa-trash-can fa-3x"></i>
+            <p>Trash</p>
+        </div>
+    </div>
+        <div class="pop-up about-this-mac" id="about-this-mac">
+            <div id="window-bar"><h3><span>About</span></h3><i class="fa-regular fa-window-maximize"></i><i class="fa-solid fa-x"></i></div>
+            <div class="text">
+                <p>The Macintosh, Version 1.0 (18 Jan 84)</p>
+                <p>The OG Apple Computer</p>
+            </div>
+        </div>
+        <div class="pop-up--stay-on" id="turn-back-on">
+            <div id="window-bar"><p></p></div>
+            <div class="text">
+                <p id="turn-on-btn"></i><i class="fa-solid fa-power-off fa-2xl"></i> Turn back on</p>
+            </div>
+        </div>
+        <div class="pop-up notepad" id="notepad">
+            <div id="window-bar"><h3><span>Notepad</span></h3><i class="fa-regular fa-window-maximize"></i><i class="fa-solid fa-x"></i></div>
+            <div class="text" id="new-notes">
+                <p>Leave yourself some notes:</p>
+                <form id="contact-form">
+                    <textarea name="message" id="message" required></textarea></br>
+                    <input type="submit" value="Save" id="save"></input>
+                    <button id="viewSaved">View Saved Notes</button>
+                </form>
+            </div>
+            <div class="text" id="saved-notes">
+                <p>Saved Notes:</p>
+                <dl id="currentMessages">
+                
+                </dl>
+                <button id="clear">Clear Notes</button>
+                <button id="go-back">Create New Note</button>
+            </div>  
+        </div>
+        <div class="pop-up trash" id="trash">
+            <div id="window-bar"><h3><span>Trash</span></h3><i class="fa-regular fa-window-maximize"></i><i class="fa-solid fa-x"></i></div>
+            <div class="trashicons">
+                <div class="icon program" id="programIcon">
+                    <i class="fa-regular fa-folder-open fa-3x"></i></i>
+                    <p>Program1</p>
+                </div>
+                <div class="icon program" id="programIcon">
+                    <i class="fa-regular fa-folder-open fa-3x"></i>
+                    <p>Program2</p>
+                </div>               
+            </div>
+    </div>
+</body>
+<script type="module" src="./script.js"></script>
+</html>
