@@ -88,21 +88,21 @@ nav {
   width: 500px;
   display: none;
 }
-#window-bar {
+.window-bar {
   border-bottom: 1px solid black;
   padding-right: 2px;
   display: flex;
   justify-content: end;
 }
-#window-bar i {
+.window-bar i {
   margin: 3px;
   padding-top: 2px;
 }
-#window-bar p {
+.window-bar p {
   display: flex;
   justify-content: center;
 }
-#window-bar h3 {
+.window-bar h3 {
   margin-bottom: 0px;
   width: 100%;
   text-align: center;
@@ -111,7 +111,7 @@ nav {
   line-height: 0.4em;
   margin: 10px 0px 10px;
 }
-#window-bar h3 span {
+.window-bar h3 span {
   background: #fff;
   padding: 0 10px;
   margin-left: 25px;
@@ -127,6 +127,8 @@ nav {
   position: absolute;
   top: 15vh;
   left: 15vw;
+  height: 50vh;
+  width: 50vw;
 }
 
 #turn-back-on {
@@ -147,6 +149,10 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: start;
+}
+
+.order {
+  order: 1;
 }
 
 .icon {

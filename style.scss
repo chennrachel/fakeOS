@@ -85,7 +85,7 @@ nav {
         @extend .pop-up;
     }
 }
-#window-bar {
+.window-bar {
     border-bottom: 1px solid black;
     padding-right: 2px;
     display: flex;
@@ -122,6 +122,8 @@ nav {
 // pop ups from apple icon)
 .about-this-mac {
     @include mixins.positioning (15vh, 15vw);
+    height: 50vh;
+    width: 50vw;
 }
 #turn-back-on {
     @include mixins.positioning (45vh, 45vw);
@@ -129,7 +131,7 @@ nav {
     width: 250px;
 }
 
-// icon programs 
+// icon + their popups 
 .icons {
     display: flex;
     flex-direction: column;
@@ -140,6 +142,10 @@ nav {
     flex-direction: row;
     align-items: start;
 }
+.order {
+    order: 1;
+}
+
 .icon {
     margin: 15px;
     width: 75px;
@@ -194,8 +200,7 @@ nav {
         width: 100%;
         height: 30vh;
     }
-}
-    
+}   
 #saved-notes {
     text-align: center;
     display: none;

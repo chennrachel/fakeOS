@@ -17,25 +17,23 @@ let clickedNote = false; // for open from file
 let clickedTrash = false; // for open from file
 
 /**
- * removes grey drop down: (file+close) + (file+close-all) 
+ * removes grey drop down for (file > close) + (file > close-all) 
  */
 const ungrey = () => {
-    closeFromFile.classList.remove('greyed');
-    closeAll.classList.remove('greyed');
+    Array.from(fileClose).forEach((item) => item.classList.remove('greyed'));
 }
 
 /**
- * greys out drop down: (file+close) + (file+close-all)
- * 
+ * greys out drop down for (file > close) + (file > close-all)
  */
 const grey = () => {
-    closeFromFile.classList.add('greyed');
-    closeAll.classList.add('greyed');
+    Array.from(fileClose).forEach((item) => item.classList.add('greyed'));
 }
 
+let fileClose = document.getElementsByClassName('file-close');
+
 /**
- * clicking apple + about this mac will open the about-this-mac popup
- * 
+ * shows the about-this-mac popup when (apple > about this mac) is clicked
  */
 const showAboutMac = (event) => {
     console.log('showing mac info');
@@ -50,7 +48,9 @@ let about = document.getElementById('about-this-mac');
 
 appleAbout.addEventListener('click', showAboutMac);
 
-// hiding popups
+/**
+ * hides the relevant popup when the close icon is clicked
+ */
 const hidePopup = (event) => {
     let maxZIndex = getMaxZIndex();
     console.log('closing popup');
@@ -68,8 +68,10 @@ const hidePopup = (event) => {
 let close = document.getElementsByClassName('fa-solid fa-x');
 Array.from(close).forEach((item) => item.addEventListener('click', hidePopup));
 
-// close from file
-const closePopUp = (event) => {
+/**
+ * closes the popup that is on top when (file > close) is clicked
+ */
+ const closePopUp = (event) => {
     let maxZIndex = getMaxZIndex();
     for (let i = 0; i < popUps.length; i++) {
         if (popUps[i].style['z-index'] == maxZIndex) {
@@ -86,7 +88,9 @@ const closePopUp = (event) => {
 let closeFromFile = document.getElementById('dropdown-file__a--close');
 closeFromFile.addEventListener('click', closePopUp)
 
-// close all
+/** 
+ * closes all popups when (file > close-all) is clicked
+ */
 const closeAllPopups = () => {
     console.log('closing all windows');
     for (let i = 0; i < popUps.length; i++) {
@@ -99,15 +103,15 @@ let closeAll = document.getElementById('dropdown-file__a--close-all');
 
 closeAll.addEventListener('click', closeAllPopups);
 
-// shutting down the mac
+/**
+ * hides the menu bar, body and icons, closes all popups and opens the turn-on popup when (apple > shut down) is clicked
+ */
 const shuttingDown = () => {
     menu.style.display = 'none';
     document.body.classList.toggle('off');
     turnOnPopUp.classList.add('show');    
     closeAllPopups();
-    for (let i = 0; i < icon.length; i++) {
-        icon[i].style.display = 'none';
-    }
+    Array.from(icon).forEach((elem) => (elem.style.display = 'none'));
     console.log('shutting down');
 }
 
@@ -118,57 +122,58 @@ let popUps = document.getElementsByClassName('pop-up');
 
 shutDown.addEventListener('click', shuttingDown);
 
-// turning mac back on
+/**
+ * shows the menu bar, body and icons when turn-on-btn is clicked
+ */
 const turningOn = () => {
     console.log('turning on');
     menu.style.display = 'block';
     document.body.classList.toggle('off');
     turnOnPopUp.classList.remove('show');
-    for (let i = 0; i < icon.length; i++) {
-        icon[i].style.display = 'block';
-    }
+    Array.from(icon).forEach((elem) => (elem.style.display = 'block'));
 }
 
 let turnOn = document.getElementById('turn-on-btn');
 turnOn.addEventListener('click', turningOn);
 
-// (un/)highlight clicked icon
+/**
+ * selects an icon by changing the background and text color when an icon is clicked
+ */
 const clickedIcon = (event) => {
     removeClicked();
     for (let i = 0; i < event.path.length; i++) {
         if (event.path[i].classList.contains('icon')) {
             event.path[i].classList.toggle('clicked');    
             if (event.path[i].classList.contains('note')) {
-                console.log('icon clicked');
                 clickedNote = true;
-                console.log('clickedNote: ', clickedNote);
-                console.log('clickedTrash: ', clickedTrash);
+                console.log('icon clicked. clickedNote: ', clickedNote,'. clickedTrash: ', clickedTrash);
                 open.classList.toggle('greyed');
                 }
             else if (event.path[i].classList.contains('trsh')) {
-                console.log('icon clicked');
                 clickedTrash = true;
-                console.log('clickedNote: ', clickedNote);
-                console.log('clickedTrash: ', clickedTrash);
+                console.log('icon clicked. clickedNote: ', clickedNote,'. clickedTrash: ', clickedTrash);
                 open.classList.toggle('greyed');
             }
         }
     }
 }
+
+/**
+ * removes icon selection by reverting background and text color change 
+ */
 const removeClicked = (event) => {
-    for (let i = 0; i < icon.length; i++) {
-        icon[i].classList.remove('clicked');
-    }
+    Array.from(icon).forEach((elem) => (elem.classList.remove('clicked')));
     clickedNote = false;
     clickedTrash = false;
     open.classList.add('greyed')
 }
-
 let icon = document.getElementsByClassName('icon');
-
 Array.from(icon).forEach((item) => item.addEventListener('click', clickedIcon));
 
-const clickedBody = (event) => {
+/**
+ * removes icon selection when anything other than an icon is clicked
+ */
+const clickedNonIcon = (event) => {
     if (event.path[1].classList.contains('icon')) {
         return;
     }
@@ -176,9 +181,11 @@ const clickedBody = (event) => {
 }
 
 let body = document.getElementsByTagName('body');
-Array.from(body).forEach((item) => item.addEventListener('click', clickedBody));
+Array.from(body).forEach((item) => item.addEventListener('click', clickedNonIcon));
 
-// open if double clicked
+/**
+ * opens notepad when the notepad icon is double clicked
+ */
 const showNotepad = (event) => {
     notepadPopup.classList.add('show');
     ungrey();
@@ -192,6 +199,9 @@ let notepadIcon = document.getElementById('notepadIcon');
 let notepadPopup = document.getElementById('notepad');
 notepadIcon.addEventListener('dblclick', showNotepad);
 
+/**
+ * opens trash when the trash icon is double clicked
+ */
 const showTrash = (event) => {
     trashPopup.classList.add('show');
     ungrey();
@@ -206,26 +216,26 @@ let trashPopup = document.getElementById('trash');
 
 trashIcon.addEventListener('dblclick', showTrash);
 
-// open from file
+/**
+ * opens notepad or trash if the relevant icon is selected and (file > open) is clicked
+ */
 const openFromFile = (event) => {
     if (clickedNote == true && !event.path[0].classList.contains('greyed')) {
-        console.log('opening from file');
+        console.log('opening from file. clickedNote: ', clickedNote,'. clickedTrash: ', clickedTrash);
         showNotepad();
-        console.log('clickedNote: ', clickedNote);
-        console.log('clickedTrash: ', clickedTrash);
     }
     else if (clickedTrash == true && !event.path[0].classList.contains('greyed')) {
-        console.log('opening from file');
+        console.log('opening from file. clickedNote: ', clickedNote,'. clickedTrash: ', clickedTrash);
         showTrash();
-        console.log('clickedNote: ', clickedNote);
-        console.log('clickedTrash: ', clickedTrash);
     }
 }
 
 let open = document.getElementById('dropdown-file__a--open');
 open.addEventListener('click', openFromFile)
 
-// clicking popup brings it to front
+/**
+ * brings a popup to the front of the screen when it is clicked
+ */
 const bringToFront = (event) => {
     const timeSinceStart = (Date.now() - start)/1000;
     console.log(event);
@@ -238,7 +248,9 @@ const bringToFront = (event) => {
 
 Array.from(popUps).forEach((item) => item.addEventListener('click', bringToFront));
 
-// maximise button
+/**
+ * maximises/minimises the popup when the max/min icon is clicked
+ */
 const maximiseMinimise = (event) => {
     console.log('maximising or minimising');
     for (let i = 0; i< event.path.length; i++) {
@@ -252,7 +264,9 @@ let maxMin = document.getElementsByClassName('fa-window-maximize');
 
 Array.from(maxMin).forEach((item) => item.addEventListener('click', maximiseMinimise));
 
-// show time
+/**
+ * shows the time
+ */
 function time() {
   var d = new Date();
   var h = d.getHours();
@@ -263,7 +277,9 @@ function time() {
 }
 setInterval(time, 1000);
 
-// find div function with the highest zindex
+/**
+ * calculates the highest Z Index on the page
+ */
 function getMaxZIndex() {
     return Math.max(
         ...Array.from(document.querySelectorAll('div.pop-up'), el =>
