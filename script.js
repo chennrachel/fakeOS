@@ -57,7 +57,9 @@ const hidePopup = (event) => {
     event.path[2].classList.toggle('show');  
     event.path[2].classList.remove('maximise'); 
     event.path[2].style['z-index'] = 0;
+    console.log(event);
     maxZIndex = getMaxZIndex();
+    console.log(maxZIndex);
     if (maxZIndex == 0) {
         grey();
     }
@@ -177,12 +179,13 @@ let body = document.getElementsByTagName('body');
 Array.from(body).forEach((item) => item.addEventListener('click', clickedBody));
 
 // open if double clicked
-const showNotepad = () => {
+const showNotepad = (event) => {
     notepadPopup.classList.add('show');
     ungrey();
     console.log('opening notepad');
     const timeSinceStart = (Date.now() - start)/1000;
     notepadPopup.style['z-index'] = Math.floor(timeSinceStart);
+    console.log('NP ZInd: ', notepadPopup.style['z-index']);
 }
 
 let notepadIcon = document.getElementById('notepadIcon');
@@ -195,6 +198,7 @@ const showTrash = (event) => {
     console.log('opening trash');
     const timeSinceStart = (Date.now() - start)/1000;
     trashPopup.style['z-index'] = Math.floor(timeSinceStart);
+    console.log('Trash ZInd: ', trashPopup.style['z-index']);
 }
 
 let trashIcon = document.getElementById('trashIcon');
@@ -224,8 +228,9 @@ open.addEventListener('click', openFromFile)
 // clicking popup brings it to front
 const bringToFront = (event) => {
     const timeSinceStart = (Date.now() - start)/1000;
+    console.log(event);
     for (let i = 0; i < popUps.length; i++) {
-        if (event.path[i].classList.contains('pop-up')) {
+        if (event.path[i].classList.contains('pop-up') && !event.path[0].classList.contains('fa-x')) {
             event.path[i].style['z-index'] = Math.floor(timeSinceStart);
         }
     }
