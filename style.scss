@@ -1,15 +1,16 @@
-@use "./partials/palette";
-@use "./partials/mixins";
+@use './partials/palette';
+@use './partials/mixins';
 
 // os-wide
-*{
+* {
     font-family: 'Sysfont';
-    cursor:default;
+    cursor: default;
 }
 body {
     background-image: radial-gradient(#7a7a7a 1px, transparent 0);
     background-size: 3px 2px;
     margin-top: 35px;
+    height: 95vh;
 }
 .off {
     background-image: none;
@@ -28,7 +29,7 @@ nav {
 }
 .dropdown {
     float: left;
-    overflow: hidden;
+    overflow-x: hidden;
     margin: 0px 10px;
     padding-left: 5px;
     border: 1px solid white;
@@ -57,12 +58,14 @@ nav {
     }
 }
 .dropbtn {
-    font-size: 16px;  
+    font-size: 16px;
     border: 1px solid white;
     outline: none;
     padding-right: 15px;
-  }
-#main-menu-group a:hover, .dropdown:hover .dropbtn {
+    cursor: pointer;
+}
+#main-menu-group a:hover,
+.dropdown:hover .dropbtn {
     border: 1px solid black;
     background: black;
     color: white;
@@ -76,7 +79,7 @@ nav {
 
 // pop-up windows
 .pop-up {
-    background-color: white; 
+    background-color: white;
     border: 1px black solid;
     height: 200px;
     width: 500px;
@@ -96,16 +99,16 @@ nav {
     }
     & p {
         display: flex;
-        justify-content: center;        
+        justify-content: center;
     }
     & h3 {
         margin-bottom: 0px;
-        width: 100%; 
-        text-align: center; 
+        width: 100%;
+        text-align: center;
         border-bottom: 1px solid black;
         border-top: 1px solid black;
         line-height: 0.4em;
-        margin: 10px 0px 10px; 
+        margin: 10px 0px 10px;
         & span {
             background: #fff;
             padding: 0 10px;
@@ -121,17 +124,17 @@ nav {
 
 // pop ups from apple icon)
 .about-this-mac {
-    @include mixins.positioning (15vh, 15vw);
+    @include mixins.positioning(15vh, 15vw);
     height: 50vh;
     width: 50vw;
 }
 #turn-back-on {
-    @include mixins.positioning (45vh, 45vw);
+    @include mixins.positioning(45vh, 45vw);
     height: 100px;
     width: 250px;
 }
 
-// icon + their popups 
+// icon + their popups
 .icons {
     display: flex;
     flex-direction: column;
@@ -179,13 +182,13 @@ nav {
     }
 }
 .trash {
-    @include mixins.positioning (20vh, 20vw);
+    @include mixins.positioning(20vh, 20vw);
     height: 50vh;
     width: 50vw;
     text-align: center;
 }
 .notepad {
-    @include mixins.positioning (25vh, 25vw);
+    @include mixins.positioning(25vh, 25vw);
     height: 60vh;
     width: 50vw;
     text-align: center;
@@ -199,8 +202,9 @@ nav {
         margin-bottom: 10px;
         width: 100%;
         height: 30vh;
+        cursor: pointer;
     }
-}   
+}
 #saved-notes {
     text-align: center;
     display: none;
@@ -215,10 +219,17 @@ nav {
     display: block;
 }
 .maximise {
-    @include mixins.positioning (30px, 7px);
-    width: 99%;
-    height: calc(99% - 30px);
+    @include mixins.positioning(30px, 7px);
+    width: 90vw;
+    height: 90vh;
+}
+.normal {
+    cursor: pointer;
 }
 .greyed {
     color: grey;
+    cursor: default;
+}
+i {
+    cursor: pointer;
 }
